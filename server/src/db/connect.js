@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-dotenv.config({ path: '../.env' })
+dotenv.config()
 //TODO: avec node 20 il n'est plus nécessaire de passer par dotenv
 //https://netbasal.com/node-js-v20-6-0-introducing-built-in-env-file-support-fb1b1de4f1fa
+
 
 const {
   MONGO_CLUSTER,
@@ -10,7 +11,7 @@ const {
   MONGO_USER,
   MONGO_PWD
 } = process.env
-
+// mongodb+srv://<username>:<password>@cluster0.qgk4x.mongodb.net/?retryWrites=true&w=majority
 const MONGO_URI_STRING = [
   "mongodb+srv://",
   MONGO_USER,
