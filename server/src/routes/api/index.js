@@ -11,11 +11,7 @@ router.get('/', (req, res) => {
     message: 'API/V1',
   });
 });
-// api/v1/users/
-router.get('/users', async (req, res) => {
-  const allU = await usersService.findAllUsers()
-  res.json(allU);
-});
+
 
 
 // api/v1/ping 
