@@ -3,10 +3,8 @@ import usersController from '#src/controllers/usersController'
 const router = express.Router();
 
 
-router.get('/',usersController.allUserController);
+router.get('/',usersController.allUsers);
 
-router.post('/register', (req, res) => {
-  res.send('register');
-});
+router.post('/',usersController.createUser);
 
 export default router;

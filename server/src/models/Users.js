@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
     lastName : String, 
     firstName: String,
-    email: { type:String,  required:'un nom est obligatoire:)' },
+    email: { type:String,  required:'un nom est obligatoire:)', unique:true },
     password:{type:String, minLength: 3, maxLength: 20 },
     roles:[Schema.Types.ObjectId]
 },
