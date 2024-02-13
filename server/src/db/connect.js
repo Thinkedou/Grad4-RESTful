@@ -4,7 +4,6 @@ dotenv.config()
 //TODO: avec node 20 il n'est plus nécessaire de passer par dotenv
 //https://netbasal.com/node-js-v20-6-0-introducing-built-in-env-file-support-fb1b1de4f1fa
 
-
 const {
   MONGO_CLUSTER,
   MONGO_DATABASE,

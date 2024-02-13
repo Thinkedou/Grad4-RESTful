@@ -1,8 +1,9 @@
 import express from 'express';
 import morgan  from 'morgan';
-import connect from './db/connect.js';
+
 import api     from '#src/routes/api/index';
 
+import connect from './db/connect.js';
 const app = express()
 connect()
 app.use(morgan('dev'))
