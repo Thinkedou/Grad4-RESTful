@@ -6,7 +6,8 @@ const userSchema = new Schema({
     lastName : String, 
     firstName: String,
     email: { type:String,  required:'un nom est obligatoire:)', unique:true },
-    password:{type:String, minLength: 3, maxLength: 20 },
+    password:{ type:String },
+    salt:{type:String},
     roles:[Schema.Types.ObjectId]
 },
 { timestamps: true }
