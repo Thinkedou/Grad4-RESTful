@@ -10,7 +10,12 @@ const exposeServices = {
         } catch (error) {
             throw new Error(error)
         }
+    },
+    comparePassword : async ({password,storedPassword})=>{
+        const result = await bcrypt.compare(password, storedPassword);
+        return result 
     }
+
    
 
 }
