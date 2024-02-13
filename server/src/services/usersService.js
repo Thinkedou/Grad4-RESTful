@@ -18,8 +18,7 @@ const exposeServices = {
         
         const newUserData = {
             ...rawData,
-            password:hash,
-            salt
+            password:hash
         }
 
         try {
