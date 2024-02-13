@@ -5,7 +5,7 @@ const exposeController = {
 
     allUserController:async (req,res)=>{
         const allUsers = await usersService.findAllUsers()
-        res.json(allUsers)
+        return res.json(allUsers)
     }
 
 }

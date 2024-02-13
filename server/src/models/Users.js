@@ -3,10 +3,14 @@ const { Schema } = mongoose;
 
 
 const userSchema = new Schema({
-    lastName : String , 
+    lastName : String, 
     firstName: String,
     email: { type:String,  required:'un nom est obligatoire:)' },
-});
+    password:{type:String, minLength: 3, maxLength: 20 },
+    roles:[Schema.Types.ObjectId]
+},
+{ timestamps: true }
+);
 
 const userModel = mongoose.model('users',userSchema)
 
