@@ -42,6 +42,7 @@ const exposeServices = {
         }
     },
     patchCreation: async ({id,body})=>{
+        //TODO: rendre dynamique l'attribution du addToSet
         const {
             categories=false,
             ...rest
