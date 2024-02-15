@@ -4,8 +4,12 @@ WORKDIR /server
 
 COPY package.json .
 
+COPY . .
+RUN rm -r node_modules
+RUN npm install pm2 -g
 RUN npm install
 
-COPY . .
+CMD ["pm2-runtime", "src/index.js"]
 
-CMD ["npm", "src/index.js"]
+
+

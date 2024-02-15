@@ -31,10 +31,14 @@ const exposeServices = {
     updateCreation: async ({id,body})=>{
 
         try {
-            const   updatedCrea  = await Creation.findOneAndUpdate({
-                _id:id,
-                body
-            }) 
+            const   updatedCrea  = await Creation.findOneAndUpdate(
+                {
+                    _id:id
+                },
+                {
+                    body
+                }
+            ) 
             return  updatedCrea
         } catch (error) {
             throw new Error(error)

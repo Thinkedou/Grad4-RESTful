@@ -8,7 +8,7 @@ const exposeController = {
         return res.json(allCreations)
     },
     oneCreation:async (req,res)=>{
-        const {id} = req.params
+        const {params:{id}} = req
         const oneCrea = await creationsService.findOneCreation({id})
         if(!oneCrea) return res.sendStatus(404)
         return res.json(oneCrea)
@@ -17,7 +17,7 @@ const exposeController = {
         const {body}  = req
         try {
                 const newCrea = await creationsService.createCreations(body)     
-                return res.json(newCrea)
+                return res.status(201).json(newCrea)
             } catch (error) {
                return res.sendStatus(400)
             // return res.json({error})
