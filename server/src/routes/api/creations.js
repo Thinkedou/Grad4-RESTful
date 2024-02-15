@@ -7,5 +7,6 @@ router.get('/',creationsController.allCreations);
 router.get('/:id',creationsController.oneCreation);
 router.post('/',creationsController.createCreation);
 router.put('/:id',creationsController.updateCreation);
+router.patch('/:id',creationsController.patchCreation);
 
 export default router;

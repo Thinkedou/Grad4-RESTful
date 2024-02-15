@@ -33,10 +33,34 @@ const exposeServices = {
         try {
             const   updatedCrea  = await Creation.findOneAndUpdate(
                 {_id:id},
-                {...body},
+                body,
                 {new:true}
             ) 
             return  updatedCrea
+        } catch (error) {
+            throw new Error(error)
+        }
+    },
+    patchCreation: async ({id,body})=>{
+        const {
+            categories=false,
+            ...rest
+        } = body
+        const updateQ = {
+            $addToSet:{
+                categories:{
+                    $each:categories
+                }
+            },
+            ...rest
+        }
+        try {
+            const   patchCrea  = await Creation.findOneAndUpdate(
+                {_id:id},
+                updateQ,
+                {new:true}
+            ) 
+            return  patchCrea
         } catch (error) {
             throw new Error(error)
         }

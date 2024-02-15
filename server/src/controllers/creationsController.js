@@ -36,6 +36,19 @@ const exposeController = {
             // return res.json({error})
         }
         
+    },
+    patchCreation:async (req,res)=>{
+        const {body}  = req
+        const {id}    = req.params
+        try {
+               
+                const toPatch = await creationsService.patchCreation({id,body})     
+                return res.json(toPatch)
+            } catch (error) {
+               return res.sendStatus(400)
+            // return res.json({error})
+        }
+        
     }
 
 
