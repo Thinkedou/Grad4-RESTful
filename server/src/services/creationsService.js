@@ -32,12 +32,9 @@ const exposeServices = {
 
         try {
             const   updatedCrea  = await Creation.findOneAndUpdate(
-                {
-                    _id:id
-                },
-                {
-                    body
-                }
+                {_id:id},
+                {...body},
+                {new:true}
             ) 
             return  updatedCrea
         } catch (error) {

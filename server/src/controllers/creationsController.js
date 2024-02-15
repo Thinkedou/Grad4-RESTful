@@ -27,7 +27,9 @@ const exposeController = {
         const {body}  = req
         const {id}    = req.params
         try {
+               
                 const toUpdate = await creationsService.updateCreation({id,body})     
+                
                 return res.json(toUpdate)
             } catch (error) {
                return res.sendStatus(400)
