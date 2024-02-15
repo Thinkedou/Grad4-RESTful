@@ -10,9 +10,27 @@ const exposeServices = {
             throw new Error(error)
         }
     },
-    findAllCreations: async ()=>{
+    findAllCreations: async (query)=>{
+        // là ici je vais manipuler ma query
+        // pour en faire un objet mongod 
+        // query {categories:'ynov'}
+        const {
+            sort=false,
+            fields=false,
+            ...rest
+        } = query
+        const filtering  = {...rest}
+        const sorting = {}
+        if(sort.indexOf('-')>=0){
+            const cleanField = sort.slice(1,sort.length)
+            sorting[cleanField]=-1
+          }else{
+            sorting[sort]=1
+        }
+        const options = {sort:{...sorting}}
+        console.log(options)
         try {
-            const   allCrea = await Creation.find()
+            const   allCrea = await Creation.find(filtering,{},options)
             return  allCrea
         } catch (error) {
             throw new Error(error)

@@ -4,7 +4,8 @@ import creationsService from '#src/services/creationsService'
 const exposeController = {
 
     allCreations:async (req,res)=>{
-        const allCreations = await creationsService.findAllCreations()
+        const {query} = req
+        const allCreations = await creationsService.findAllCreations(query)
         return res.json(allCreations)
     },
     oneCreation:async (req,res)=>{
