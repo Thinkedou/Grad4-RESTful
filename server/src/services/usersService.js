@@ -1,5 +1,5 @@
-import User from "#src/models/Users";
-import bcrypt from "bcrypt"
+import User  from "#src/models/Users";
+import bcryptjs from "bcryptjs"
 
 const exposeServices = {
 
@@ -13,8 +13,8 @@ const exposeServices = {
     },
     createUser: async (rawData)=>{
         const {password} = rawData
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(password, salt);
+        const salt = bcryptjs.genSaltSync(10);
+        const hash = bcryptjs.hashSync(password, salt);
         
         const newUserData = {
             ...rawData,

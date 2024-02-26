@@ -1,5 +1,5 @@
 import User from "#src/models/Users";
-import bcrypt from "bcrypt"
+import bcryptjs from "bcryptjs"
 
 const exposeServices = {
 
@@ -12,7 +12,7 @@ const exposeServices = {
         }
     },
     comparePassword : async ({password,storedPassword})=>{
-        const result = await bcrypt.compare(password, storedPassword);
+        const result = await bcryptjs.compare(password, storedPassword);
         return result 
     }
 
