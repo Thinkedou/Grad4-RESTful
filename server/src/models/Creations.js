@@ -8,9 +8,10 @@ const creationSchema = new Schema({
     categories: [Schema.Types.Mixed],
     comments:[Schema.Types.Mixed],
     author:Schema.Types.Mixed,
-    publicationDate:{type:Date,default: Date.now}
-},
-{ timestamps: true }
+    publicationDate:{type:Date,default: Date.now},
+    isFav:{type:Boolean}
+    },
+    { timestamps: true }
 );
 
 const creationModel = mongoose.model('creations',creationSchema)

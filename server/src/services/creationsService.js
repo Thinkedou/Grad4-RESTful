@@ -1,4 +1,5 @@
 import Creation from "#src/models/Creations";
+import queryBuilder from "#src/utils/mongoQueryBuilder";
 
 const exposeServices = {
 
@@ -15,21 +16,13 @@ const exposeServices = {
         // pour en faire un objet mongod 
         // query {categories:'ynov'}
         const {
-            sort=false,
-            fields=false,
-            ...rest
-        } = query
-        const filtering  = {...rest}
-        const sorting = {}
-        if(sort.indexOf('-')>=0){
-            const cleanField = sort.slice(1,sort.length)
-            sorting[cleanField]=-1
-          }else{
-            sorting[sort]=1
-        }
-        const options = {sort:{...sorting}}
+            filter,
+            projection,
+            options
+        } = queryBuilder.getFindOptions({query})
+
         try {
-            const   allCrea = await Creation.find(filtering,{},options)
+            const   allCrea = await Creation.find(filter,projection,options)
             return  allCrea
         } catch (error) {
             throw new Error(error)

@@ -17,7 +17,7 @@ const exposeController = {
             roles:user.roles
         }
         if(comparePwd){ 
-            const token         = signJwt({payload:tokenPayload,expiresIn:'5m'}) 
+            const token         = signJwt({payload:tokenPayload,expiresIn:'1d'}) 
             const refreshToken  = signJwt({payload:tokenPayload,expiresIn:'7d'}) 
             const accessToken   = {access_token:token,token_type:'Bearer'}
             const updateRefresh = await usersService.updateUserToken({userId:user._id,refreshToken})
@@ -43,7 +43,7 @@ const exposeController = {
                 roles:foundUser.roles
             }
             if(decoded.email!==foundUser.email) return res.sendStatus(403)
-            const accessToken = signJwt({payload:tokenPayload,expiresIn:'5m'}) 
+            const accessToken = signJwt({payload:tokenPayload,expiresIn:'1d'}) 
             return res.json({accessToken,token_type:'Bearer'})
         } catch (error) {
             console.log(error)
