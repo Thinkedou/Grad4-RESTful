@@ -1,4 +1,3 @@
-import User from "#src/models/Users";
 import bcrypt from "bcryptjs"
 
 const exposeServices = {

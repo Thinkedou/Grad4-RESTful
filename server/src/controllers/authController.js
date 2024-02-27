@@ -1,5 +1,3 @@
-import jwt          from 'jsonwebtoken'
-const secretKey     = 'secret_key';
 import authService  from '#src/services/authService'
 import usersService from '#src/services/usersService'
 import {signJwt,verifyJwt}    from '#src/utils/jwtoken'

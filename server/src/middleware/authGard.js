@@ -1,7 +1,7 @@
 import {verifyJwt}    from '#src/utils/jwtoken'
 
 
-const exposeController = {
+const exposeMiddleware = {
 
     protect:async (req,res,next)=>{
         const accessToken  = req.headers['authorization'];
@@ -25,4 +25,4 @@ const exposeController = {
     }
 }
 
-export default exposeController
+export default exposeMiddleware
