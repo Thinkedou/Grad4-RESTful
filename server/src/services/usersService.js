@@ -1,20 +1,37 @@
 import User  from "#src/models/Users";
-import bcryptjs from "bcryptjs"
+import bcrypt from "bcryptjs"
 
 const exposeServices = {
 
+    findOneUserByEmail:async ({email})=>{
+        try {
+            const   findUser = await User.findOne({email})
+            return  findUser
+        } catch (error) {
+            throw error
+        }
+
+    },
+    findUserByRefreshToken:async ({refreshToken})=>{
+        try {
+            const   findUser = await User.findOne({refreshToken})
+            return  findUser
+        } catch (error) {
+            throw error
+        }
+    },
     findAllUsers: async ()=>{
         try {
             const   allUsers = await User.find()
             return  allUsers
         } catch (error) {
-            throw new Error(error)
+            throw error
         }
     },
     createUser: async (rawData)=>{
         const {password} = rawData
-        const salt = bcryptjs.genSaltSync(10);
-        const hash = bcryptjs.hashSync(password, salt);
+        const salt = bcrypt.genSaltSync(4);
+        const hash = bcrypt.hashSync(password, salt);
         
         const newUserData = {
             ...rawData,
@@ -26,7 +43,24 @@ const exposeServices = {
             const   newUser = toSave.save()   
             return  newUser
         } catch (error) {
-            throw new Error(error)
+            throw error
+        }
+    },
+    updateUserToken: async ({userId,refreshToken})=>{
+               
+        const query = {
+            _id:userId
+        }
+        const updateQ = {
+            $set:{
+                refreshToken
+            }
+        }
+        try {
+            const   toUpdate = await User.findOneAndUpdate(query,updateQ,{new:true})
+            return  toUpdate
+        } catch (error) {
+            throw error
         }
     }
 

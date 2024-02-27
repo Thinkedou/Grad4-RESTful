@@ -28,7 +28,6 @@ const exposeServices = {
             sorting[sort]=1
         }
         const options = {sort:{...sorting}}
-        console.log(options)
         try {
             const   allCrea = await Creation.find(filtering,{},options)
             return  allCrea
