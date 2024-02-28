@@ -20,7 +20,7 @@ const exposeServices = {
             projection,
             options
         } = queryBuilder.getFindOptions({query})
-
+        
         try {
             const   allCrea = await Creation.find(filter,projection,options)
             return  allCrea

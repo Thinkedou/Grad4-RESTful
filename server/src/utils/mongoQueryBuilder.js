@@ -40,15 +40,16 @@ const queryBuilder = {
         return {...queryRest}
     },
     extractSort(sort){
+        const sortOptions={}
         if(sort){
             if(sort.indexOf('-')>=0){
                 const cleanParam=sort.slice(1,sort.length) // remove - from param names
-                return {[cleanParam]:-1}
+                sortOptions[cleanParam]=-1
               }else{
-                return {[sort]:1}
+                sortOptions[sort]=1
             }
         }
-        return sort
+        return {sort:sortOptions}
     },
     // > https://mongoosejs.com/docs/api.html#query_Query-select
     extractSimpleProjection(fields){
