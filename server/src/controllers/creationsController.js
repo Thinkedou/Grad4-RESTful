@@ -1,4 +1,8 @@
+import etag from "etag"
+import crypto from 'crypto'
+import {isFresh} from '#src/utils/eTagChecker'
 import creationsService from '#src/services/creationsService'
+
 
 
 const exposeController = {
@@ -6,7 +10,19 @@ const exposeController = {
     allCreations:async (req,res)=>{
         const {query} = req
         const allCreations = await creationsService.findAllCreations(query)
-        return res.json(allCreations)
+
+        const data = JSON.stringify(allCreations)
+
+        //etag module create a sha1 hash
+        res.setHeader('etag',etag(data)) 
+
+        if(isFresh(req,res)){
+            console.log('🥸','CONTENU TOUJOURS VALIDE > 302 (FOUND)')
+            return res.sendStatus(302)
+        }else{
+            console.log('✨','NOUVEAU CONTENU > 200')
+            return res.json(allCreations)
+        }
     },
     oneCreation:async (req,res)=>{
         const {params:{id}} = req
