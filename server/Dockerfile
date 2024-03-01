@@ -5,7 +5,7 @@ WORKDIR /server
 COPY package.json .
 
 COPY . .
-RUN rm -r node_modules
+# RUN rm -r node_modules
 RUN npm install pm2 -g
 RUN npm install
 

@@ -30,7 +30,7 @@ const queryBuilder = {
             }
         }
        
-        console.log(JSON.stringify(findObjectParams, null, 2))
+        // console.log(JSON.stringify(findObjectParams, null, 2))
         return findObjectParams
 
     },

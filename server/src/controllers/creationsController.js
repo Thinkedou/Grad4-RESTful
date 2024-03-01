@@ -1,10 +1,20 @@
 import creationsService from '#src/services/creationsService'
 
+import {redisClient,get} from '#src/services/redisClient';
 
 const exposeController = {
 
     allCreations:async (req,res)=>{
         const {query} = req
+        const cacheResults = await get('all_creations')
+        if (cacheResults) {
+            console.log('CACHE HIT')
+        }else{
+            console.log('CACHE MISS')
+        }
+        redisClient.set('all_creations', 'value stored in redis cache(mem)');
+        // const cacheKey = `user_profile_${userId}`;
+        // client.del(cacheKey);
         const allCreations = await creationsService.findAllCreations(query)
         return res.json(allCreations)
     },
