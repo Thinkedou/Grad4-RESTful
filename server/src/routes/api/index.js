@@ -3,7 +3,7 @@ import ping from './ping.js';
 import auth from './auth.js';
 import users from './users.js';
 import creations from './creations.js';
-
+import sse from './sse.js';
 const router = express.Router();
 
 // api/v1/
@@ -21,5 +21,6 @@ router.use('/auth', auth);
 router.use('/users', users);
 router.use('/creations', creations);
 
+router.use('/sse', sse);
 
 export default router;
