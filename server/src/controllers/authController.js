@@ -17,7 +17,7 @@ const exposeController = {
             roles:user.roles
         }
         if(comparePwd){ 
-            const token         = signJwt({payload:tokenPayload,expiresIn:'1d'}) 
+            const token         = signJwt({payload:tokenPayload,expiresIn:'5min'}) 
             const refreshToken  = signJwt({payload:tokenPayload,expiresIn:'7d'}) 
             const accessToken   = {access_token:token,token_type:'Bearer'}
             const updateRefresh = await usersService.updateUserToken({userId:user._id,refreshToken})
