@@ -28,6 +28,19 @@ const exposeServices = {
             throw new Error(error)
         }
     },
+    countCreations: async (query)=>{
+
+        const {
+            filter
+        } = queryBuilder.getFindOptions({query})
+        
+        try {
+            const   howManyCreas = await Creation.countDocuments(filter)
+            return  howManyCreas
+        } catch (error) {
+            throw new Error(error)
+        }
+    },
     createCreations: async (rawData)=>{
 
         try {

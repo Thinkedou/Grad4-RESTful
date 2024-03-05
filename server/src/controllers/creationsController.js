@@ -6,6 +6,8 @@ const exposeController = {
     allCreations:async (req,res)=>{
         const {query} = req
         const allCreations = await creationsService.findAllCreations(query)
+        const xCountCreas  = await creationsService.countCreations(query)
+        res.set('X-count',xCountCreas)
         return res.json(allCreations)
     },
     oneCreation:async (req,res)=>{

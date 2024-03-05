@@ -1,15 +1,13 @@
-
-
 const queryBuilder = {
 
     getFindOptions({query}={}){
         
-        const defaultLimit = 50
+        const defaultLimit = 5
         const {
             fields=false,
             sort=false,
-            page=null,
-            limit=null,
+            page=1,
+            limit=defaultLimit,
             ...rest
             } = query;
         const mongooseQuery      = this.extractQuery(rest)
@@ -17,20 +15,20 @@ const queryBuilder = {
         const mongooseSort       = this.extractSort(sort)
         //TODO Pagination! 
         // {skip:10}, {limit:50}
-        // const mongooseLimit      = this.extractLimit(perPage)
-        // const mongooseSkip       = this.extractSkip(page,perPage)
+        const mongooseLimit      = this.extractLimit(limit)
+        const mongooseSkip       = this.extractSkip(page,limit)
 
         const findObjectParams = {
             filter    :mongooseQuery,
             projection:mongooseProjection,
             options   :{
                 ...mongooseSort,
-                // ...mongooseLimit,
-                // ...mongooseSkip
+                ...mongooseLimit,
+                ...mongooseSkip
             }
         }
-       
-        console.log(JSON.stringify(findObjectParams, null, 2))
+        console.log(findObjectParams)
+        // console.log(JSON.stringify(findObjectParams, null, 4))
         return findObjectParams
 
     },
@@ -50,6 +48,15 @@ const queryBuilder = {
             }
         }
         return {sort:sortOptions}
+    },
+    extractLimit(limit){
+        return {limit}
+    },
+
+    extractSkip(page,limit){
+        const offset = page>1?page:page-1
+        const skip = offset*limit
+        return {skip:skip}
     },
     // > https://mongoosejs.com/docs/api.html#query_Query-select
     extractSimpleProjection(fields){

@@ -17,7 +17,7 @@ const exposeMiddleware = {
         
         console.log(`controle de ${ressourcePath} en ${method}`,findRessource)
         if(isAllowed){
-            next()
+          return next()
         }
         return res.sendStatus(403)
        
