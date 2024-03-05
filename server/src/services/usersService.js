@@ -12,6 +12,27 @@ const exposeServices = {
         }
 
     },
+    findOneUserById:async ({id})=>{
+        try {
+            const   findUser = await User.findOne({_id:id})
+            return  findUser
+        } catch (error) {
+            throw error
+        }
+    },
+    findOneUserByIdWithRoles:async ({id})=>{
+        const q     ={_id:id}
+        const filter={roles:1}
+        const embed ={
+            populate:{ path: 'roles', select: 'authorizations' }
+        }
+        try {
+            const   findUser = await User.findOne(q,filter,embed)
+             return findUser
+        } catch (error) {
+            throw error
+        }
+    },
     findUserByRefreshToken:async ({refreshToken})=>{
         try {
             const   findUser = await User.findOne({refreshToken})
