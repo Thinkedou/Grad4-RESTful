@@ -1,5 +1,5 @@
 import etag from "etag"
-import crypto from 'crypto'
+import fresh from 'fresh'
 import {isFresh} from '#src/utils/eTagChecker'
 import creationsService from '#src/services/creationsService'
 
@@ -15,14 +15,21 @@ const exposeController = {
 
         //etag module create a sha1 hash
         res.setHeader('etag',etag(data)) 
-
-        if(isFresh(req,res)){
-            console.log('🥸','CONTENU TOUJOURS VALIDE > 302 (FOUND)')
-            return res.sendStatus(302)
+        // ici on va comparer les deux hashs
+        const resEtag = res.get('etag')
+        const reqEtag = req.get('etag')
+        const resHeader = { etag:resEtag ,'if-none-match':'*'}
+        const reqHeader = { etag: reqEtag ?? '','if-none-match':reqEtag ?? ''}
+        
+        const isFreshStatut = fresh(reqHeader,resHeader)
+        if(isFreshStatut){
+            console.log('Le client est à jour', 304)
+            return res.sendStatus(304)
         }else{
-            console.log('✨','NOUVEAU CONTENU > 200')
             return res.json(allCreations)
         }
+
+        
     },
     oneCreation:async (req,res)=>{
         const {params:{id}} = req
