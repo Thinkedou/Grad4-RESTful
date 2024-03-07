@@ -28,7 +28,14 @@ const get = async (redisKey)=>{
         })
     })
 }
-
+const set = async (redisKey,value,options)=>{
+    return new Promise(resolve => {
+        redisClient.set(redisKey,value,options,(err, res) => {
+            if (err) console.error(err);
+            resolve(res)
+        })
+    })
+}
 
 
 
@@ -36,5 +43,6 @@ const get = async (redisKey)=>{
 export {
     initializeRedisClient,
     redisClient,
-    get
+    get,
+    set
 }
